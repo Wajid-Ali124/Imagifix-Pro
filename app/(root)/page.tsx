@@ -5,8 +5,9 @@ import Image from "next/image"
 import Link from "next/link"
 
 const Home = async ({ searchParams }: SearchParamProps) => {
-  const page = Number(searchParams?.page) || 1;
-  const searchQuery = (searchParams?.query as string) || '';
+  const params = await searchParams;
+  const page = Number(params?.page) || 1;
+  const searchQuery = (params?.query as string) || '';
 
   const images = await getAllImages({ page, searchQuery})
 
@@ -14,7 +15,7 @@ const Home = async ({ searchParams }: SearchParamProps) => {
     <>
       <section className="home">
         <h1 className="home-heading">
-          Unleash Your Creative Vision with Imagifix Pro
+          AI Magic for Your Images Effortless Enhancements & Edits!
         </h1>
         <ul className="flex-center w-full gap-20">
           {navLinks.slice(1, 5).map((link) => (

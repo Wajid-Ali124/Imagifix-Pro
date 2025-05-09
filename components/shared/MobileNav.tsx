@@ -1,6 +1,6 @@
 "use client"
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { navLinks } from "@/constants"
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import Image from "next/image"
@@ -15,7 +15,7 @@ const MobileNav = () => {
     <header className="header">
       <Link href="/" className="flex items-center gap-2 md:py-2">
         <Image
-          src="/assets/images/logo-text.svg"
+          src="/assets/images/Imagifix-Pro.png"
           alt="logo"
           width={180}
           height={28}
@@ -36,10 +36,11 @@ const MobileNav = () => {
                 className="cursor-pointer"
               />
             </SheetTrigger>
+            <SheetTitle className="sheet-title"></SheetTitle>
             <SheetContent className="sheet-content sm:w-64">
               <>
                 <Image 
-                  src="/assets/images/logo-text.svg"
+                  src="/assets/images/Imagifix-Pro.png"
                   alt="logo"
                   width={152}
                   height={23}
@@ -73,7 +74,7 @@ const MobileNav = () => {
         </SignedIn>
 
         <SignedOut>
-            <Button asChild className="button bg-purple-gradient bg-cover">
+            <Button asChild className="button bg-pink-gradient bg-cover">
               <Link href="/sign-in">Login</Link>
             </Button>
           </SignedOut>

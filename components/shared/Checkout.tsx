@@ -1,6 +1,6 @@
 "use client";
 
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { useEffect } from "react";
 
 import { useToast } from "@/components/ui/use-toast";
@@ -59,12 +59,12 @@ const Checkout = ({
   };
 
   return (
-    <form action={onCheckout} method="POST">
+    <form action={onCheckout}>
       <section>
         <Button
           type="submit"
           role="link"
-          className="w-full rounded-full bg-purple-gradient bg-cover"
+          className="w-full rounded-md bg-pink-gradient bg-cover"
         >
           Buy Credit
         </Button>
