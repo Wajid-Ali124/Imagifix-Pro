@@ -27,9 +27,8 @@ export async function POST(req: Request) {
     });
   }
 
-  // Get the body
-  const payload = await req.json();
-  const body = JSON.stringify(payload);
+  // Get the raw body string for Svix verification
+  const body = await req.text();
 
   // Create a new Svix instance with your secret.
   const wh = new Webhook(WEBHOOK_SECRET);
@@ -58,12 +57,17 @@ export async function POST(req: Request) {
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
 
+    const usernameFallback =
+      username ||
+      email_addresses?.[0]?.email_address?.split("@")[0] ||
+      id;
+
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
-      username: username!,
-      firstName: first_name!,
-      lastName: last_name!,
+      username: usernameFallback,
+      firstName: first_name ?? "",
+      lastName: last_name ?? "",
       photo: image_url,
     };
 
@@ -84,12 +88,12 @@ export async function POST(req: Request) {
 
   // UPDATE
   if (eventType === "user.updated") {
-    const { id, image_url, first_name, last_name, username } = evt.data;
+    const { id, image_url, first_name, last_name, username, email_addresses } = evt.data;
 
     const user = {
-      firstName: first_name!,
-      lastName: last_name!,
-      username: username!,
+      firstName: first_name ?? "",
+      lastName: last_name ?? "",
+      username: username || email_addresses?.[0]?.email_address?.split("@")[0] || id,
       photo: image_url,
     };
 
